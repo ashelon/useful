@@ -1,0 +1,115 @@
+<?php
+
+
+include_once 'includes/API_call.inc';
+include_once 'includes/admin_settings_form.inc';
+
+/*
+
+  Frequently used paths:
+
+  $GLOBALS['base_url'] => http://example.com/drupal
+  base_path() => /drupal/
+  request_uri() => /drupal/documentation?page=1
+  request_path() => documentation
+  current_path() => node/26419
+
+*/
+
+
+
+/**
+ * Implements hook_menu()
+ *
+ */
+function MODULE_menu() {
+  $items['path/to/page'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_MODULE_form'),
+    'access callback' => 'MODULE_checkaccess',
+    'access arguments' => array(array('administrator', 'Content beheerder')),
+    'title' => 'Title of page',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+
+/**
+ *  Implements hook_permission()
+ *
+ */
+function MODULE_permission() {
+  return array(
+    'reply to comments as organisation' => array(
+      'title' => t('Reply as your organisation to comments'),
+      'description' => t('Allows authorised users to post reponses to user comments on node pages.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_cron().
+ *
+ */
+function MODULE_cron() {
+  // Execute some function here.
+}
+
+
+
+/**
+ * Provide a form to do things.
+ *
+ */
+function _MODULE_form() {
+  $form = array();
+
+  // Fill this up beforehand.
+  $options = array();
+
+  $form['intro'] = array(
+    '#type' => 'item',
+    '#markup' => 'Text to explain what this form is all about.',
+  );
+
+  $form['option_list'] = array(
+    '#type' => 'select',
+    '#title' => t('Make a selection'),
+    '#options' => array('option 1', 'option 2', 'option 3'),
+    '#description' => '',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit', 
+    '#value' => t('Submit this form'),
+  );
+
+  // Options list should be populated beforehand but wasn't, inform the user.
+  if (empty($options)) {
+    drupal_set_message('No terms found in options list.');
+    $form['options_list']['#options'] = array(0 => 'No options found, you need to add some.'); 
+    $form['option_list']['#disabled'] = TRUE;
+    $form['submit']['#disabled'] = TRUE;
+
+    $form['help'] = array(
+      '#type' => 'item',
+      '#markup' => 'Could not find things.',
+    );
+  }
+
+  return $form;
+}
+
+
+/**
+ * _MODULE_form() submit handler
+ *
+ */
+function _MODULE_form_submit($form, &$form_state) {
+  // process your form here.
+
+  watchdog('info', $watchdog);
+  drupal_set_message($message);
+}

@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_install()
+ */
+function MODULE_install() {  
+  // Define a custom marker for your Google Maps
+  variable_set('gmap_marker_custom_dir', drupal_get_path('module', 'your_custom_module') . '/map-markers');
+
+  // Set a default text for a custom admin form
+  variable_set('admin_form_intro', 'Text right here.');
+}
+
+
+
+
+/**
+ * Implements hook_uninstall()
+ */
+function MODULE_uninstall() {
+  variable_del('gmap_marker_custom_dir');
+  variable_del('admin_form_intro');
+}

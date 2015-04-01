@@ -1,0 +1,8 @@
+name = Standard Drupal Module
+description = Frequently used functions
+core = 7.x
+package = Your fancy project
+version = 7.x-1.x
+
+dependencies[] = block
+dependencies[] = comment
