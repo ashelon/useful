@@ -16,6 +16,6 @@ Useful Drupal development tools
 How do I get PHP Errors to display?
 ---------------------------------
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+* ini_set('display_errors', 1);
+* ini_set('display_startup_errors', 1);
+* error_reporting(E_ALL);
