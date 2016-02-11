@@ -12,3 +12,10 @@ Useful Drupal development tools
 *quick-d7-install-script* contains a quick and dirty shell script that downloads and installs Drupal 7 with standard contrib modules.
  
 *drush-make* does the same, but more elegantly with drush.
+
+How do I get PHP Errors to display?
+---------------------------------
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
